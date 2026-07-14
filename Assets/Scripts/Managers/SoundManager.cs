@@ -1,16 +1,21 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
+    public AudioMixerGroup sfxGroup;
+
     public AudioClip spawnSound;
     public AudioClip catchSound;
     public AudioClip missSound;
+
 
     private AudioSource audioSource;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = sfxGroup;
     }
 
     public void PlaySpawnSound()
