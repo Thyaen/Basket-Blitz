@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class followMouseHorizontal : MonoBehaviour
+public class FollowMouseHorizontal : MonoBehaviour
 {
     [Header("Movement")]
     public float maxSpeed = 12f;
