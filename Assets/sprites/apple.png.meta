@@ -103,10 +103,10 @@ TextureImporter:
       name: apple_0
       rect:
         serializedVersion: 2
-        x: 238
-        y: 217
-        width: 561
-        height: 660
+        x: 248
+        y: 227
+        width: 541
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

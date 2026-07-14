@@ -103,10 +103,10 @@ TextureImporter:
       name: basket_0
       rect:
         serializedVersion: 2
-        x: 132
-        y: 142
-        width: 760
-        height: 801
+        x: 142
+        y: 153
+        width: 740
+        height: 780
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
