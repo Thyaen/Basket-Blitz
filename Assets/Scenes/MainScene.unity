@@ -424,7 +424,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.49, y: 6.48}
+  m_Size: {x: 5.61, y: 6.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -487,6 +487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90a0e7bce544ed4aaecdce0ffa3526b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::followMouseHorizontal
+  maxSpeed: 12
+  smoothTime: 0.12
+  directionChangeMultiplier: 2
 --- !u!212 &1048310700
 SpriteRenderer:
   serializedVersion: 3
@@ -541,7 +544,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.48, y: 7.89}
+  m_Size: {x: 7.6, y: 8.01}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
