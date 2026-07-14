@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    private SoundManager soundManager;
+
     [Header("Prefab, das gespawnt werden soll")]
     public GameObject prefabToSpawn;
 
@@ -12,6 +14,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        soundManager = FindFirstObjectByType<SoundManager>();
         // Für jedes Kind des SpawnManagers eine Spawn-Routine starten
         foreach (Transform spawnPoint in transform)
         {
@@ -27,6 +30,11 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
             Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+
+            if (soundManager != null)
+            {
+                soundManager.PlaySpawnSound();
+            }
         }
     }
 }

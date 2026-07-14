@@ -3,9 +3,11 @@ using UnityEngine;
 public class BasketBehaviour : MonoBehaviour
 {
     private ScoreManager scoreManager;
+    private SoundManager soundManager;
 
     private void Start()
     {
+        soundManager = FindFirstObjectByType<SoundManager>();
         scoreManager = FindFirstObjectByType<ScoreManager>();
     }
 
@@ -17,6 +19,12 @@ public class BasketBehaviour : MonoBehaviour
             {
                 scoreManager.AddScore();
             }
+
+            if (soundManager != null)
+            {
+                soundManager.PlayCatchSound();
+            }
+
 
             Destroy(other.gameObject);
         }

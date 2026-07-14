@@ -6,10 +6,12 @@ public class AppleBehaviour : MonoBehaviour
     private Rigidbody2D rb;
     private Camera mainCamera;
     private HealthManager healthManager;
+    private SoundManager soundManager;
 
     void Start()
     {
         healthManager = FindFirstObjectByType<HealthManager>();
+        soundManager = FindFirstObjectByType<SoundManager>();
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
 
@@ -37,10 +39,16 @@ public class AppleBehaviour : MonoBehaviour
         // Objekt löschen, wenn es unter den Bildschirm fällt
         if (transform.position.y < bottomEdge - 1f)
         {
+            if (soundManager != null)
+            {
+                soundManager.PlayMissSound();
+            }
+
             if (healthManager != null)
             {
                 healthManager.LoseLife();
             }
+
 
             Destroy(gameObject);
         }
