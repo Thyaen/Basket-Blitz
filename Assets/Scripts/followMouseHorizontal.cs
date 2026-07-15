@@ -10,6 +10,11 @@ public class FollowMouseHorizontal : MonoBehaviour
     [Tooltip("Je größer der Wert, desto träger ist der Richtungswechsel.")]
     public float directionChangeMultiplier = 2.0f;
 
+    [Header("Voice Teleport")]
+    public Transform[] teleportPoints;
+
+    private bool ignoreMouse = false;
+
     private float minX;
     private float maxX;
 
@@ -24,6 +29,9 @@ public class FollowMouseHorizontal : MonoBehaviour
 
     void Update()
     {
+        if (ignoreMouse)
+            return;
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         float targetX = Mathf.Clamp(mousePos.x, minX, maxX);
@@ -57,5 +65,34 @@ public class FollowMouseHorizontal : MonoBehaviour
             transform.position.y,
             transform.position.z
         );
+    }
+
+    public void TeleportToPoint(int index)
+    {
+        if (index < 0 || index >= teleportPoints.Length)
+            return;
+
+        StopAllCoroutines();
+        StartCoroutine(TeleportRoutine(index));
+    }
+
+    private System.Collections.IEnumerator TeleportRoutine(int index)
+    {
+        ignoreMouse = true;
+
+        // Basket sofort versetzen
+        transform.position = new Vector3(
+            teleportPoints[index].position.x,
+            transform.position.y,
+            transform.position.z
+        );
+
+        // Bewegung zurücksetzen, damit nichts "nachzieht"
+        currentVelocity = 0f;
+        lastVelocity = 0f;
+
+        yield return new WaitForSeconds(1f);
+
+        ignoreMouse = false;
     }
 }

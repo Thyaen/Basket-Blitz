@@ -7,16 +7,19 @@ public class VoiceRecognizer : MonoBehaviour
 {
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
+    private FollowMouseHorizontal basketMovement;
 
     void Start()
     {
+        basketMovement = FindFirstObjectByType<FollowMouseHorizontal>();
+
         keywords.Add("eins", () => NumberRecognized(1));
         keywords.Add("zwei", () => NumberRecognized(2));
         keywords.Add("drei", () => NumberRecognized(3));
         keywords.Add("vier", () => NumberRecognized(4));
         keywords.Add("fünf", () => NumberRecognized(5));
 
-        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
+        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray(), ConfidenceLevel.Low);
 
         keywordRecognizer.OnPhraseRecognized += OnPhraseRecognized;
         keywordRecognizer.Start();
@@ -38,7 +41,10 @@ public class VoiceRecognizer : MonoBehaviour
     {
         Debug.Log("Der Spieler sagte: " + number);
 
-        // Hier kannst du später deine Spiellogik einbauen.
+        if (basketMovement != null)
+        {
+            basketMovement.TeleportToPoint(number - 1);
+        }
     }
 
     private void OnDestroy()
