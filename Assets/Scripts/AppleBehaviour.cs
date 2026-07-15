@@ -8,6 +8,8 @@ public class AppleBehaviour : MonoBehaviour
     private HealthManager healthManager;
     private SoundManager soundManager;
 
+    public static bool appleIsFalling = false;
+
     void Start()
     {
         healthManager = FindFirstObjectByType<HealthManager>();
@@ -27,7 +29,13 @@ public class AppleBehaviour : MonoBehaviour
         float waitTime = Random.Range(1f, 10f);
         yield return new WaitForSeconds(waitTime);
 
-        // Schwerkraft aktivieren
+        // Warten, bis kein anderer Apfel mehr fällt
+        while (appleIsFalling)
+        {
+            yield return null;
+        }
+
+        appleIsFalling = true;
         rb.gravityScale = 1f;
     }
 
@@ -51,6 +59,14 @@ public class AppleBehaviour : MonoBehaviour
 
 
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (rb != null && rb.gravityScale > 0f)
+        {
+            appleIsFalling = false;
         }
     }
 }

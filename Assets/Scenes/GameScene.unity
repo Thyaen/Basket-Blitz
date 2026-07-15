@@ -2289,8 +2289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
   prefabToSpawn: {fileID: 5234327718111273977, guid: 175572b7e64f86f4cbb94a4f51a65731, type: 3}
-  minSpawnTime: 12
-  maxSpawnTime: 16
+  minSpawnTime: 11
+  maxSpawnTime: 13
 --- !u!4 &1040258187
 Transform:
   m_ObjectHideFlags: 0
