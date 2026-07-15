@@ -2343,8 +2343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90a0e7bce544ed4aaecdce0ffa3526b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::followMouseHorizontal
-  maxSpeed: 12
-  smoothTime: 0.12
+  maxSpeed: 20
+  smoothTime: 0.1
   directionChangeMultiplier: 2
   teleportPoints:
   - {fileID: 902996889}
