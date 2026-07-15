@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   sfxGroup: {fileID: 6794448395071639112, guid: 1339660925bbfb943b7718960bd90f45, type: 2}
   spawnSound: {fileID: 8300000, guid: 6a40d86245ad6614aa6c46cbb44fdd90, type: 3}
-  catchSound: {fileID: 8300000, guid: 6a2707ffe680e834eaa06103f30285fe, type: 3}
+  catchSound: {fileID: 8300000, guid: 599102d3085f94f4a988b65140b807b3, type: 3}
   missSound: {fileID: 8300000, guid: bb6feb1dccaf3a342a1f738f203703ee, type: 3}
 --- !u!82 &530375840
 AudioSource:
@@ -1381,7 +1381,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.084
+  m_Volume: 0.045
   m_Pitch: 1
   Loop: 0
   Mute: 0
