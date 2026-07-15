@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class FollowMouseHorizontal : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class FollowMouseHorizontal : MonoBehaviour
 
     [Header("Voice Teleport")]
     public Transform[] teleportPoints;
+
+    private Coroutine teleportCoroutine;
 
     private bool ignoreMouse = false;
 
@@ -72,27 +75,43 @@ public class FollowMouseHorizontal : MonoBehaviour
         if (index < 0 || index >= teleportPoints.Length)
             return;
 
-        StopAllCoroutines();
-        StartCoroutine(TeleportRoutine(index));
+        if (teleportCoroutine != null)
+            StopCoroutine(teleportCoroutine);
+
+        teleportCoroutine = StartCoroutine(TeleportRoutine(index));
     }
 
-    private System.Collections.IEnumerator TeleportRoutine(int index)
+    private IEnumerator TeleportRoutine(int index)
     {
         ignoreMouse = true;
 
-        // Basket sofort versetzen
         transform.position = new Vector3(
             teleportPoints[index].position.x,
             transform.position.y,
             transform.position.z
         );
 
-        // Bewegung zurücksetzen, damit nichts "nachzieht"
         currentVelocity = 0f;
         lastVelocity = 0f;
 
         yield return new WaitForSeconds(1f);
 
         ignoreMouse = false;
+        teleportCoroutine = null;
     }
+
+    public void AppleCaught()
+    {
+        if (!ignoreMouse)
+            return;
+
+        if (teleportCoroutine != null)
+        {
+            StopCoroutine(teleportCoroutine);
+            teleportCoroutine = null;
+        }
+
+        ignoreMouse = false;
+    }
+
 }

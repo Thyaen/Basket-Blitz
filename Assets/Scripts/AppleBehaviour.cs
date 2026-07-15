@@ -8,6 +8,9 @@ public class AppleBehaviour : MonoBehaviour
     public float warningDuration = 1f;
     public float shakeSpeed = 25f;
 
+    [Header("Fall Delay")]
+    public float delayBetweenApples = 0.75f;
+
     public AudioClip warningSound;
 
     private Vector3 originalScale;
@@ -19,6 +22,9 @@ public class AppleBehaviour : MonoBehaviour
     private SoundManager soundManager;
 
     public static bool appleIsFalling = false;
+    public static float nextAllowedFallTime = 0f;
+
+    private SpawnPointData spawnPointData;
 
     void Start()
     {
@@ -30,6 +36,7 @@ public class AppleBehaviour : MonoBehaviour
         soundManager = FindFirstObjectByType<SoundManager>();
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+
 
         // Schwerkraft zunächst deaktivieren
         rb.gravityScale = 0f;
@@ -44,10 +51,11 @@ public class AppleBehaviour : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         // Warten, bis kein anderer Apfel fällt
-        while (appleIsFalling)
+        while (appleIsFalling || Time.time < nextAllowedFallTime)
         {
             yield return null;
         }
+        appleIsFalling = true;
 
         // ===== Warnphase =====
 
@@ -87,7 +95,6 @@ public class AppleBehaviour : MonoBehaviour
         transform.rotation = Quaternion.identity;
         transform.localScale = originalScale;
 
-        appleIsFalling = true;
         rb.gravityScale = 1f;
     }
 
@@ -116,9 +123,19 @@ public class AppleBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (spawnPointData != null)
+        {
+            spawnPointData.currentApple = null;
+        }
         if (rb != null && rb.gravityScale > 0f)
         {
             appleIsFalling = false;
+            nextAllowedFallTime = Time.time + delayBetweenApples;
         }
+    }
+
+    public void SetSpawnPoint(SpawnPointData data)
+    {
+        spawnPointData = data;
     }
 }
