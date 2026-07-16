@@ -2371,6 +2371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610df1225b4fd15458d6ed0674f94206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasketBehaviour
+  basketSprite: {fileID: -2000726247262814106, guid: a5f98673e543650429f38a26cb776d91, type: 3}
+  trashCanSprite: {fileID: 5955627512070630672, guid: abee563bdaea7d34ea6107334501d6dc, type: 3}
 --- !u!1 &1067020324
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class AppleBehaviour : MonoBehaviour
 {
+    [Header("Sprites")]
+    public Sprite normalAppleSprite;
+    public Sprite rottenAppleSprite;
+
+    [Range(0f, 1f)]
+    public float rottenChance = 0.2f;
+
+    public bool isRotten = false;
+
     [Header("Fall Warning")]
     public float warningScale = 1.15f;
     public float warningDuration = 1f;
@@ -20,6 +29,7 @@ public class AppleBehaviour : MonoBehaviour
     private Camera mainCamera;
     private HealthManager healthManager;
     private SoundManager soundManager;
+    private SpriteRenderer spriteRenderer;
 
     public static bool appleIsFalling = false;
     public static float nextAllowedFallTime = 0f;
@@ -28,6 +38,18 @@ public class AppleBehaviour : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (Random.value < rottenChance)
+        {
+            isRotten = true;
+            spriteRenderer.sprite = rottenAppleSprite;
+        }
+        else
+        {
+            isRotten = false;
+            spriteRenderer.sprite = normalAppleSprite;
+        }
         audioSource = GetComponent<AudioSource>();
 
         originalScale = transform.localScale;

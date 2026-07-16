@@ -8,16 +8,19 @@ public class VoiceRecognizer : MonoBehaviour
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
     private FollowMouseHorizontal basketMovement;
+    private BasketBehaviour basketBehaviour;
 
     void Start()
     {
         basketMovement = FindFirstObjectByType<FollowMouseHorizontal>();
+        basketBehaviour = FindFirstObjectByType<BasketBehaviour>();
 
         keywords.Add("eins", () => NumberRecognized(1));
         keywords.Add("zwei", () => NumberRecognized(2));
         keywords.Add("drei", () => NumberRecognized(3));
         keywords.Add("vier", () => NumberRecognized(4));
         keywords.Add("fünf", () => NumberRecognized(5));
+        keywords.Add("Müll", TrashRecognized);
 
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray(), ConfidenceLevel.Low);
 
@@ -44,6 +47,16 @@ public class VoiceRecognizer : MonoBehaviour
         if (basketMovement != null)
         {
             basketMovement.TeleportToPoint(number - 1);
+        }
+    }
+
+    private void TrashRecognized()
+    {
+        BasketBehaviour basket = FindFirstObjectByType<BasketBehaviour>();
+
+        if (basket != null)
+        {
+            basket.ActivateTrashMode();
         }
     }
 

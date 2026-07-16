@@ -108,6 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2e1c836bb428f44ae9cea8e360c7da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AppleBehaviour
+  normalAppleSprite: {fileID: -7832214784768987486, guid: 905215913f708342e83d1f08bbcd7277, type: 3}
+  rottenAppleSprite: {fileID: -2489679566984714152, guid: 5011097eda0deda498de462856f02493, type: 3}
+  rottenChance: 0.2
+  isRotten: 0
   warningScale: 1.15
   warningDuration: 1
   shakeSpeed: 25
