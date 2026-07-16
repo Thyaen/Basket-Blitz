@@ -99,6 +99,7 @@ public class BasketBehaviour : MonoBehaviour
 
         spriteRenderer.sprite = basketSprite;
 
+        IsTrashMode = false;
         trashCoroutine = null;
     }
 
