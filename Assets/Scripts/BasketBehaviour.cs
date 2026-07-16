@@ -28,6 +28,21 @@ public class BasketBehaviour : MonoBehaviour
         movement = GetComponent<FollowMouseHorizontal>();
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (IsTrashMode)
+            {
+                SwitchToBasket();
+            }
+            else
+            {
+                SwitchToTrash();
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         AppleBehaviour apple = other.GetComponent<AppleBehaviour>();
@@ -80,7 +95,22 @@ public class BasketBehaviour : MonoBehaviour
 
     public void DeactivateTrashMode()
     {
-        IsTrashMode = false;
+        SwitchToBasket();
+    }
+
+    private IEnumerator TrashModeRoutine()
+    {
+        SwitchToTrash();
+
+        yield return new WaitForSeconds(1.5f);
+
+        SwitchToBasket();
+
+        trashCoroutine = null;
+    }
+
+    public void SwitchToBasket()
+    {
         if (trashCoroutine != null)
         {
             StopCoroutine(trashCoroutine);
@@ -91,16 +121,16 @@ public class BasketBehaviour : MonoBehaviour
         spriteRenderer.sprite = basketSprite;
     }
 
-    private IEnumerator TrashModeRoutine()
+    public void SwitchToTrash()
     {
+        if (trashCoroutine != null)
+        {
+            StopCoroutine(trashCoroutine);
+            trashCoroutine = null;
+        }
+
+        IsTrashMode = true;
         spriteRenderer.sprite = trashCanSprite;
-
-        yield return new WaitForSeconds(1.5f);
-
-        spriteRenderer.sprite = basketSprite;
-
-        IsTrashMode = false;
-        trashCoroutine = null;
     }
 
 
